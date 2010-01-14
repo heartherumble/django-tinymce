@@ -23,7 +23,7 @@ DEFAULT_CONFIG = getattr(settings, 'TINYMCE_DEFAULT_CONFIG',
 
                 'gecko_spellcheck' : True,
               	#Manifest common.css
-            	'content_css': STATIC_URL+'css/editor.css',
+            	'content_css': settings.STATIC_URL+'css/editor.css',
             }
         )
 
