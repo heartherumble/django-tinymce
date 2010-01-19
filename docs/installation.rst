@@ -6,16 +6,13 @@ This section describes how to install the tinymce application in your Django
 project.
 
 
-.. _prerequisites:
-
 Prerequisites
 -------------
 
 The tinymce application requires Django_ version 1.0 or higher. You will also
-need TinyMCE_ version 3.0.1 or higher and a `language pack`_ for *every
-language* you enabled in ``settings.LANGUAGES``. If you use the filebrowser_
-application in your project, the tinymce application can use it as a browser
-when including media.
+need TinyMCE_ version 3.0 or higher and optionally a `language pack`_ for your
+projects languages. If you use the `django-filebrowser`_ application in your
+project, the tinymce application can use it as a browser when including media.
 
 If you want to use the `spellchecker plugin`_ using the supplied view (no PHP
 needed) you must install the `PyEnchant`_ package and dictionaries for your
@@ -28,29 +25,26 @@ Python code::
   import enchant
   enchant.dict_exists('en')
 
-Note that the documentation will use 'TinyMCE' (capitalized) to refer the
-editor itself and 'tinymce' (lower case) to refer to the Django application.
-
 .. _Django: http://www.djangoproject.com/download/
 .. _TinyMCE: http://tinymce.moxiecode.com/download.php
 .. _`language pack`: http://tinymce.moxiecode.com/download_i18n.php
 .. _`spellchecker plugin`: http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/spellchecker
 .. _`PyEnchant`: http://pyenchant.sourceforge.net/
-.. _filebrowser: http://code.google.com/p/django-filebrowser/
+.. _`django-filebrowser`: http://code.google.com/p/django-filebrowser/
 
 
 Installation
 ------------
 
 #. Place the ``tinymce`` module in your Python path. You can put it into your
-   Django project directory or run ``python setup.py install`` from a shell.
+Django project directory or run ``python setup.py install`` from a shell.
 
-#. Copy the ``jscripts/tiny_mce`` directory from the TinyMCE distribution
-   (see :ref:`prerequisites`) into a directory named ``js`` in your media root.
-   You can override the location in your settings (see below).
+#. Copy the ``jscripts/tiny_mce`` directory from the TinyMCE distribution into
+a directory named ``js`` in your media root. You can override the location in
+your settings (see below).
 
-#. If you want to use any of the views add tinymce to your installed
-   applications list and URLconf:
+#. If you want to use any of the views add tinymce your installed applications
+list and URLconf:
 
 ``settings.py``::
 
@@ -81,8 +75,7 @@ file.
   The URL of the TinyMCE javascript file.
 
 ``TINYMCE_JS_ROOT`` (default: ``settings.MEDIA_ROOT + 'js/tiny_mce'``)
-  The filesystem location of the TinyMCE files. It is used by the compressor
-  (see below).
+  The filesystem location of the TinyMCE files.
 
 ``TINYMCE_DEFAULT_CONFIG`` (default: ``{'theme': "simple", 'relative_urls': False}``)
   The default TinyMCE configuration to use. See `the TinyMCE manual`_ for all
@@ -101,8 +94,8 @@ file.
   will be reduced dramatically if you use this option.
 
 ``TINYMCE_FILEBROWSER`` (default: ``True`` if ``'filebrowser'`` is in ``INSTALLED_APPS``, else ``False``)
-  Whether to use the filebrowser_ as a custom filebrowser for media inclusion.
-  See the `official TinyMCE documentation on custom filebrowsers`_.
+  Whether to use `django-filebrowser`_ as a custom filebrowser for media
+  inclusion. See the `official TinyMCE documentation on custom filebrowsers`_.
 
 Example::
 
@@ -110,8 +103,6 @@ Example::
   TINYMCE_DEFAULT_CONFIG = {
       'plugins': "table,spellchecker,paste,searchreplace",
       'theme': "advanced",
-      'cleanup_on_startup': True,
-      'custom_undo_redo_levels': 10,
   }
   TINYMCE_SPELLCHECKER = True
   TINYMCE_COMPRESSOR = True

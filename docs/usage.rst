@@ -34,7 +34,7 @@ flatpage form you could use the following code::
       class Meta:
           model = FlatPage
 
-The widget accepts the following extra keyword argument:
+The widget accepts the following keyword arguments:
 
 ``mce_attrs`` (default: ``{}``)
   Extra TinyMCE configuration options. Options from
@@ -44,15 +44,12 @@ The widget accepts the following extra keyword argument:
   JSON encoding. For example, to disable word wrapping you would include
   ``'nowrap': True``.
 
-The tinymce application adds one TinyMCE configuration option that can be set
-using ``mce_attrs`` (it is not useful as a default configuration):
-
 ``content_language`` (default: ``django.utils.translation.get_language_code()``)
   The language of the widget content. Will be used to set the ``language``,
   ``directionality`` and ``spellchecker_languages`` configuration options of
-  the TinyMCE editor. It may be different from the interface language, which
-  defaults to the current Django language and can be changed using the
-  ``language`` configuration option in ``mce_attrs``)
+  the TinyMCE editor. It may be different from the interface language (changed
+  using ``language`` in ``mce_attrs``) which defaults to the current Django
+  language.
 
 Templates
 ^^^^^^^^^
@@ -147,10 +144,11 @@ view). The value is a URL that points to a view that fills a list of 2-tuples
 Create the widget::
 
   from django import forms
+  from django.db import models
   from django.core.urlresolvers import reverse
   from tinymce.widgets import TinyMCE
 
-  class SomeForm(forms.Form):
+  class SomeModel(models.Model):
       somefield = forms.CharField(widget=TinyMCE(mce_attrs={'external_link_list_url': reverse('someapp.views.someview')})
 
 Create the view::
@@ -186,7 +184,7 @@ the link dialog you could use something like this::
   class TinyMCEFlatPageAdmin(FlatPageAdmin):
       def formfield_for_dbfield(self, db_field, **kwargs):
           if db_field.name == 'content':
-              return db_field.formfield(widget=TinyMCE(
+              return forms.CharField(widget=TinyMCE(
                   attrs={'cols': 80, 'rows': 30},
                   mce_attrs={'external_link_list_url': reverse('tinymce.views.flatpages_link_list')},
               ))
@@ -206,10 +204,8 @@ ModelAdmin class for flatpages first::
 The source contains a `test project`_ that includes this flatpages model admin.
 You just need to add the TinyMCE javascript code.
 
-#. Checkout the test project:
-   ``svn checkout http://django-tinymce.googlecode.com/svn/trunk/testtinymce``
-#. Copy the ``tiny_mce`` directory from the TinyMCE distribution into
-   ``media/js``
+#. Checkout the test project: ``svn checkout http://django-tinymce.googlecode.com/svn/trunk/testtinymce``
+#. Copy the ``tiny_mce`` directory from the TinyMCE distribution into ``media/js``
 #. Run ``python manage.py syncdb``
 #. Run ``python manage.py runserver``
 #. Connect to `http://localhost:8000/admin/`_
@@ -248,5 +244,7 @@ tag::
 
 With this template code the tekst inside the HTML element with id
 ``preview-content`` will be replace by the content of the TinyMCE editor.
+
+
 
 .. _`preview plugin`: http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/preview
