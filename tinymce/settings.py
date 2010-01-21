@@ -6,7 +6,7 @@ DEFAULT_CONFIG = getattr(settings, 'TINYMCE_DEFAULT_CONFIG',
 #        {'theme': "simple", 'relative_urls': False})
 
             {
-                'plugins': 'advimage,advlink,table,searchreplace,contextmenu,template,paste,save,autosave',
+                'plugins': 'advimage,advlink,table,searchreplace,contextmenu,template,paste,save,autosave,media',
             	'mode':'exact',
                 'theme': 'advanced',
                 'cleanup_on_startup': True,
