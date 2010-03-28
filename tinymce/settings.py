@@ -22,7 +22,6 @@ DEFAULT_CONFIG = getattr(settings, 'TINYMCE_DEFAULT_CONFIG',
                 'height' : 480,
 
                 'gecko_spellcheck' : True,
-              	#Manifest common.css
             	'content_css': settings.STATIC_URL+'css/editor.css',
             }
         )
